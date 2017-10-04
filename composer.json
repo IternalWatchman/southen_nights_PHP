@@ -1,0 +1,16 @@
+{
+    "name": "lex/discounts",
+    "description": "discounts micro",
+    "authors": [
+        {
+            "name": "Kauperwood",
+            "email": "noblethrow@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Lex\\": "code/"
+        }
+    },
+    "require": {}
+}
