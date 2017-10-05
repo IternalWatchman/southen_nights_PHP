@@ -47,9 +47,9 @@ class Watchman {
 							$product['id'], 
 							$product['category'], 
 							$product['price'],
+							$product['description'],
 							$item['quantity'],
-							$item['total'],
-							$product['description']
+							$item['total']
 						)
 					);
 				}
