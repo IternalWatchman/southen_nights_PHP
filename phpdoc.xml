@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>Service Documentations</title>
+    <parser>
+        <target>reference/docs</target>
+    </parser>
+    <transformer>
+        <target>reference/docs</target>
+    </transformer>
+    <files>
+        <directory>.</directory>
+        <ignore>vendor/*</ignore>
+        <ignore>data/*</ignore>
+        <ignore>tests/*</ignore>
+        <ignore>autoload.php</ignore>
+        <ignore>index.php</ignore> 
+    </files>
+</phpdoc>
