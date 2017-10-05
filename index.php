@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require 'autoload.php';
 
 $watchman = new Lex\Watchman();
 
