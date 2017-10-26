@@ -1,6 +1,6 @@
 {
     "name": "lex/discounts",
-    "description": "discounts micro",
+    "description": "discounts micro-service",
     "authors": [
         {
             "name": "Kauperwood",
@@ -12,5 +12,12 @@
             "Lex\\": "code/"
         }
     },
-    "require": {}
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ]
+    },
+    "require": {
+        "laravel/lumen": "^5.5"
+    }
 }

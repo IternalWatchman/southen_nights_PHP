@@ -1,7 +1,9 @@
 <?php
 
-require 'autoload.php';
+$app = require __DIR__.'/bootstrap.php';
 
+$app->run();
+/*
 $watchman = new Lex\Watchman();
 
 $rules = [
@@ -28,3 +30,4 @@ else {
 	else
 		var_dump($discounts);	
 }
+*/

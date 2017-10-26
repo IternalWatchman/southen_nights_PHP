@@ -19,7 +19,7 @@ class Product {
      * @param  string total
      * @return void
      */
-	public function __construct($id, $category_id, $price, $description, $quantity, $total) {
+	public function __construct($id, $category_id, $price, $description, $quantity=null, $total=null) {
 		$this->id = $id;
 		$this->category = $category_id;
 		$this->price = $price;

@@ -63,7 +63,7 @@ class Order {
      * @return void
      */
 	public function addProduct(Product $product) {
-		array_push($this->products, $product);
+		if ($product->quantity())
+			array_push($this->products, $product);
 	}
-
 }

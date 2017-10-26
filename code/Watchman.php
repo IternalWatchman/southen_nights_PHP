@@ -46,7 +46,7 @@ class Watchman {
      */
 	public function findProduct($id) {
 		$d = $this->search('product', $id);
-		return $data ? new Product($d['id'], $d['category'], $d['price'], $d['description']) : false;
+		return $d ? new Product($d['id'], $d['category'], $d['price'], $d['description']) : false;
 	}
 	/**
 	 * Get customer instance
