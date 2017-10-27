@@ -24,21 +24,21 @@ class DiscountController extends Controller
 
 		$this->validate($request, [
 			'id' => 'required|integer',
-	    	'customer-id' => [ 'required', 'integer'],
-	    	'items' => ['required','array'],
-	    	'items.*.product-id' => ['required', 'alpha_num'],
-	    	'items.*.quantity' => 'required|integer',
-	    	'total' => 'required|regex:/^[1-9][0-9]*(\.\d{1,2})?$/'
-	    ]);
+			'customer-id' => [ 'required', 'integer'],
+			'items' => ['required','array'],
+			'items.*.product-id' => ['required', 'alpha_num'],
+			'items.*.quantity' => 'required|integer',
+			'total' => 'required|regex:/^[1-9][0-9]*(\.\d{1,2})?$/'
+		]);
 		// check if order are in 'dummy database'
-	    $this->validate($request, [
-	    	'id' => [new ValidOrder],
-	    ]);
-	   	// check if customer and products are in 'dummy database'
-	    $this->validate($request, [
-	    	'customer-id' => [new ValidCustomer],	    	
-	    	'items.*.product-id' => [new ValidProduct],
-	    ]);
+		$this->validate($request, [
+			'id' => [new ValidOrder],
+		]);
+			// check if customer and products are in 'dummy database'
+		$this->validate($request, [
+			'customer-id' => [new ValidCustomer],	    	
+			'items.*.product-id' => [new ValidProduct],
+		]);
 
 		$p = $request->post();
 		$id = (int) $p['id'];

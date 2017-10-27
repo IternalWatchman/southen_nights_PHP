@@ -3,23 +3,23 @@
 require 'vendor/autoload.php';
 
 try {
-    (new Dotenv\Dotenv(__DIR__))->load();
+	(new Dotenv\Dotenv(__DIR__))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
-    //
+	//
 }
 
 $app = new Laravel\Lumen\Application(
-    realpath(__DIR__)
+	realpath(__DIR__)
 );
 
 $app->singleton(
-    Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Lex\Exceptions\Handler::class
+	Illuminate\Contracts\Debug\ExceptionHandler::class,
+	Lex\Exceptions\Handler::class
 );
 
 $app->singleton(
-    Illuminate\Contracts\Console\Kernel::class,
-    Lex\Console\Kernel::class
+	Illuminate\Contracts\Console\Kernel::class,
+	Lex\Console\Kernel::class
 );
 
 $app->router->group([
