@@ -24,7 +24,7 @@ class Order {
      * @param  string total
      * @return void
      */
-	public function __construct($id, Customer $customer, $total) {
+	public function __construct($id, Customer $customer, $total=null) {
 		$this->id = $id;
 		$this->customer = $customer;
 		$this->total = $total;

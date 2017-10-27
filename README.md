@@ -5,6 +5,7 @@ This is a php version of discounts service as php copy of <a href="https://githu
 ```
 apt-get install php-memcached
 composer install
+echo "APP_DEBUG=false" > .env
 
 #tests
 phpunit

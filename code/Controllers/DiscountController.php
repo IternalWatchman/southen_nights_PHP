@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 use Lex\Watchman;
+use Lex\Validation\Product as ValidProduct;
+use Lex\Validation\Order as ValidOrder;
+use Lex\Validation\Customer as ValidCustomer;
+
 use Lex\Order;
 use Lex\Product;
 use Lex\Customer;
@@ -18,31 +22,46 @@ class DiscountController extends Controller
 
 	public function calculate(Request $request) {
 
-		$post =  $request->post();
-		$id = (int) $post['id'];
-		$customer_id = (int) $post['customer-id'];
-		$items = $post['items'];
-		$total = (float) $post['total'];
+		$this->validate($request, [
+			'id' => 'required|integer',
+	    	'customer-id' => [ 'required', 'integer'],
+	    	'items' => ['required','array'],
+	    	'items.*.product-id' => ['required', 'alpha_num'],
+	    	'items.*.quantity' => 'required|integer',
+	    	'total' => 'required|regex:/^[1-9][0-9]*(\.\d{1,2})?$/'
+	    ]);
+		// check if order are in 'dummy database'
+	    $this->validate($request, [
+	    	'id' => [new ValidOrder],
+	    ]);
+	   	// check if customer and products are in 'dummy database'
+	    $this->validate($request, [
+	    	'customer-id' => [new ValidCustomer],	    	
+	    	'items.*.product-id' => [new ValidProduct],
+	    ]);
+
+		$p = $request->post();
+		$id = (int) $p['id'];
+		$customer_id = (int) $p['customer-id'];
+		$items = $p['items'];
 
 		$watchman = new Watchman();
 		$customer = $watchman->findCustomer($customer_id);
-		$order = new Order($id, $customer, $total);
-		
+		$order = new Order($id, $customer, $p['total']);
+
 		foreach($items as $item) {
 			$product = $watchman->findProduct($item['product-id']);
 			$quantity = (int) $item['quantity'];
-
-			if ($quantity)
-				$order->addProduct(
-					new Product(
-						$product->id(), 
-						$product->category(), 
-						$product->price(),
-						$product->description(),
-						$quantity,
-						$product->price() * $quantity
-					)
-				);
+			$order->addProduct(
+				new Product(
+					$product->id(), 
+					$product->category(), 
+					$product->price(),
+					$product->description(),
+					$quantity, 
+					$product->price() * $quantity 
+				)
+			);
 		}
 
 		$rules = [

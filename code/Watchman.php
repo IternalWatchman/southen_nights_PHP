@@ -27,10 +27,9 @@ class Watchman {
      * Search in some file by id
      * @param  string type of file
      * @param  int|strin entity id
-     * @access private
      * @return array|bool
      */
-	private function search($type, $entity_id) {
+	public function search($type, $entity_id) {
 		$jsondata = file_get_contents($this->sources[$type]);
 		$array = json_decode($jsondata, true);
 		$result = false;

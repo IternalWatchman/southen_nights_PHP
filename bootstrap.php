@@ -25,7 +25,7 @@ $app->singleton(
 $app->router->group([
 	'namespace' => 'Lex\Controllers',
 ], function ($router) {
-	$router->post('/', 'DiscountController@calculate');
+	$router->post('/calculate', 'DiscountController@calculate');
 });
 
 return $app;
