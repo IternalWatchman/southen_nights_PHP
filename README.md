@@ -8,7 +8,7 @@ composer install
 echo "APP_DEBUG=false" > .env
 
 #tests
-phpunit
+./vendor/bin/phpunit
 
 # also if you need phpdock
 phpdock

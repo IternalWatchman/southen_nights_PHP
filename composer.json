@@ -19,5 +19,8 @@
     },
     "require": {
         "laravel/lumen": "^5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
     }
 }
