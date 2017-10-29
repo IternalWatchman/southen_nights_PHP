@@ -83,6 +83,10 @@ class Discount extends Controller
 			if($rule->test($order)) 
 				array_push($discounts, $rule->calc($order));
 
-		return response()->json($discounts);
+		return response()->json([
+			'status' => 200,
+			'message' => 'OK',
+			'discounts' => $discounts
+		]);
 	}
 }
