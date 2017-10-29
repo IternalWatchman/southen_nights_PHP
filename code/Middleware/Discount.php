@@ -10,7 +10,7 @@ use Lex\Validation\Order as ValidOrder;
 use Lex\Validation\Customer as ValidCustomer;
 use Lex\Validation\Items as ValidItems;
 
-class Discount extends Controller
+class Discount
 {
 	/**
      * Run the request filter.
@@ -26,7 +26,7 @@ class Discount extends Controller
 		if(empty($request->json()->all())) {
 			throw new Exception('invalid JSON');
 		}
-
+		// base check 
 		$validator1 = Validator::make($request->post(), [
 	        'id' => 'required|integer',
 			'customer-id' => 'required|integer',
@@ -36,6 +36,7 @@ class Discount extends Controller
 			'total' => 'required|regex:/^[1-9][0-9]*(\.\d{1,2})?$/'
 	    ]);
 
+		// 
 	    if ($validator1->fails())
 		    return $this->jsonErrorsWithStatus($validator1);
 
