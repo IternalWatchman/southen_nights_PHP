@@ -3,7 +3,6 @@
 namespace Lex\Middleware;
 
 use Closure;
-use Exception;
 
 class Api
 {

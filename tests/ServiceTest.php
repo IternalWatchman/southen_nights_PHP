@@ -51,7 +51,7 @@ class ServiceTest extends TestCase
 				"errors" => [
 					"items" => [
 						[
-							"code" => "required_rule_error",
+							"type" => "required",
 							"message" => "The items field is required."
 						]
 					]
@@ -85,25 +85,25 @@ class ServiceTest extends TestCase
 				"errors" => [
 					"customer-id" => [
 						[
-							"code" => "required_rule_error",
+							"type" => "required",
 							"message" => "The customer-id field is required."
 						]
 					],
 					"total" => [
 						[
-							"code" => "regex_rule_error",
+							"type" => "regex",
 							"message" => "The total format is invalid."
 						]
 					],
 					"items.0.product-id" => [
 						[
-							"code" => "required_rule_error",
+							"type" => "required",
 							"message" => "The items.0.product-id field is required."
 						]
 					],
 					"items.1.quantity" => [
 						[
-							"code" => "required_rule_error",
+							"type" => "required",
 							"message" => "The items.1.quantity field is required."
 						]
 					]

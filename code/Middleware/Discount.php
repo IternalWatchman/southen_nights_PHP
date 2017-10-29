@@ -9,7 +9,6 @@ use Lex\Validation\Product as ValidProduct;
 use Lex\Validation\Order as ValidOrder;
 use Lex\Validation\Customer as ValidCustomer;
 use Lex\Validation\Items as ValidItems;
-use Laravel\Lumen\Routing\Controller;
 
 class Discount extends Controller
 {
