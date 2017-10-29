@@ -19,6 +19,9 @@ $app->routeMiddleware([
 	'discount' => Lex\Middleware\Discount::class,
 ]);
 
+$app->withFacades();
+$app->register(Lex\Providers\RestServiceProvider::class);
+
 $app->router->group([
 	'namespace' => 'Lex\Controllers',
 ], function ($router) {

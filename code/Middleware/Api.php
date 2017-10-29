@@ -18,11 +18,6 @@ class Api
 	{
 		$request->headers->set('Accept', 'application/json');
 		$request->headers->set('Content-Type', 'application/json');
-
-		if(empty($request->json()->all())) {
-			throw new Exception('invalid JSON');
-		}
-
 		return $next($request);
 	}
 }

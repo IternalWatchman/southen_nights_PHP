@@ -21,24 +21,49 @@ class Discount extends Controller
      * @return mixed
      */
 	public function handle($request, Closure $next) {
-		$this->validate($request, [
-			'id' => 'required|integer',
+
+		$method = $request->method();
+
+		if(empty($request->json()->all())) {
+			throw new Exception('invalid JSON');
+		}
+
+		$validator1 = Validator::make($request->post(), [
+	        'id' => 'required|integer',
 			'customer-id' => 'required|integer',
 			'items' => ['required', 'array', new ValidItems],
 			'items.*.product-id' => 'required|alpha_num',
 			'items.*.quantity' => 'required|integer',
 			'total' => 'required|regex:/^[1-9][0-9]*(\.\d{1,2})?$/'
-		]);
+	    ]);
 
-		$this->validate($request, [
+	    if ($validator1->fails())
+		    return $this->jsonErrorsWithStatus($validator1);
+
+		$validator2 = Validator::make($request->post(), [
 			'id' => [new ValidOrder],           
 		]);
 
-		$this->validate($request, [
+		if ($validator2->fails())
+			return $this->jsonErrorsWithStatus($validator2);
+
+		$validator3 = Validator::make($request->post(), [
 			'customer-id' => [new ValidCustomer],           
 			'items.*.product-id' => [new ValidProduct],
 		]);
-		
+
+		if ($validator3->fails())
+			return $this->jsonErrorsWithStatus($validator3);
+
 		return $next($request);
+	}
+
+	private function jsonErrorsWithStatus($validator) {
+		return response()->json(
+			array(
+				'status' => 422,
+				'message' => 'invalid input data',
+				'errors' => $validator->messages()
+			), 422);
 	}
 }
