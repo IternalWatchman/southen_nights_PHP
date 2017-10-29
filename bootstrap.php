@@ -25,7 +25,8 @@ $app->register(Lex\Providers\RestServiceProvider::class);
 $app->router->group([
 	'namespace' => 'Lex\Controllers',
 ], function ($router) {
-	$router->post('/calculate','Discount@calculate');
+	$router->get('/calculate/{order:[0-9]+}', 'Discount@get');
+	$router->post('/calculate',[ 'middleware' => 'discount', 'uses' => 'Discount@post']);
 });
 
 return $app;

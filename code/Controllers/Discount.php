@@ -15,13 +15,33 @@ use Lex\Order;
 use Lex\Product;
 use Lex\Customer;
 
+use Validator;
+
 class Discount extends Controller 
 {
-	public function __construct() {
-		$this->middleware('discount');
+
+	public function get(Request $request, $order_id) {
+
+		$validator = Validator::make(['order' => $order_id], [
+			'order' => [new ValidOrder]
+		]);
+		
+		if($validator->fails()) {
+			return response()->json(
+				array(
+					'status' => 422,
+					'message' => 'invalid input data',
+					'errors' => $validator->messages()
+				), 422);
+		}
+
+		$watchman = new Watchman();
+		$order = $watchman->findOrder($order_id);
+
+		return $this->calculateDiscount($order);
 	}
 
-	public function calculate(Request $request) {
+	public function post(Request $request) {
 		$p = $request->post();
 		$id = (int) $p['id'];
 		$customer_id = (int) $p['customer-id'];
@@ -45,6 +65,11 @@ class Discount extends Controller
 				)
 			);
 		}
+
+		return  $this->calculateDiscount($order);
+	}
+
+	private function calculateDiscount(Order $order) {
 
 		$rules = [
 			new \Lex\Rules\RuleOne(),
