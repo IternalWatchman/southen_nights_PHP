@@ -14,3 +14,7 @@ echo "APP_DEBUG=false" > .env
 phpdock
 
 php -S localhost:7777
+```
+
+### Literature:
+* Lumen Programming Guide Writing PHP Microservices-REST and Web Service APIs
